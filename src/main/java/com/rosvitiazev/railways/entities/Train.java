@@ -3,10 +3,10 @@ package com.rosvitiazev.railways.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "train")
+@Table(name = "id")
 public class Train {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
