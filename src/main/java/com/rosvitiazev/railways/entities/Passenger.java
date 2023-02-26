@@ -48,12 +48,19 @@ public class Passenger implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Ticket> ticketList;
 
     public Passenger() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirst_name() {
         return first_name;
@@ -95,20 +102,20 @@ public class Passenger implements Serializable {
         this.passport_number = passport_number;
     }
 
-    public Set<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(Set<Ticket> ticketList) {
-        this.ticketList = ticketList;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Ticket> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(Set<Ticket> ticketList) {
+        this.ticketList = ticketList;
     }
 
     public Passenger(String first_name, String last_name, LocalDate birth_date, String mobile_phone, String passport_number) {

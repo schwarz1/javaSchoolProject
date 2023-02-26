@@ -1,17 +1,13 @@
 package com.rosvitiazev.railways.entities;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "id")
+@Table(name = "ticket")
 
 public class Ticket implements Serializable {
     @Id
@@ -19,54 +15,59 @@ public class Ticket implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "passenger_id")
-    private Passenger passenger;
-
-    @NotEmpty
-    @Size(min = 0, max = 255)
-    @Column(name = "train_number")
-    private String train_number;
-
     @Temporal(TemporalType.DATE)
     @NotNull
     @Column(name = "departure_date")
     private Date departure_date;
 
-
     @Column(name = "cost")
     private BigDecimal cost;
 
-    @Column(name = "station_id_departure")
+    @ManyToOne
+    @JoinColumn(name = "train_id")
+    private int train_id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "passenger_id")
+    private Passenger passenger;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "station_id_departure")
     private int station_id_departure;
 
-    @Column(name = "station_id_destination")
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "station_id_destination")
     private int station_id_destination;
 
+    @OneToMany
+    @JoinColumn(name = "user_ticket")
+    private String user_ticket;
 
-    public int getTicket_id() {
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "train_id")
+    private Train train;
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
+    }
+
+    public Ticket() {
+    }
+
+
+    public int getId() {
         return id;
     }
 
-    public void setTicket_id(int ticket_id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
-    public String getTrain_number() {
-        return train_number;
-    }
-
-    public void setTrain_number(String train_number) {
-        this.train_number = train_number;
     }
 
     public Date getDeparture_date() {
@@ -77,13 +78,76 @@ public class Ticket implements Serializable {
         this.departure_date = departure_date;
     }
 
-    public Ticket() {
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public Ticket(int id, Passenger passenger, String train_number, Date departure_date) {
-        this.id = id;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public int getTrain_id() {
+        return train_id;
+    }
+
+    public void setTrain_id(int train_id) {
+        this.train_id = train_id;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
-        this.train_number = train_number;
+    }
+
+    public int getStation_id_departure() {
+        return station_id_departure;
+    }
+
+    public void setStation_id_departure(int station_id_departure) {
+        this.station_id_departure = station_id_departure;
+    }
+
+    public int getStation_id_destination() {
+        return station_id_destination;
+    }
+
+    public void setStation_id_destination(int station_id_destination) {
+        this.station_id_destination = station_id_destination;
+    }
+
+    public String getUser_ticket() {
+        return user_ticket;
+    }
+
+    public void setUser_ticket(String user_ticket) {
+        this.user_ticket = user_ticket;
+    }
+
+    public Ticket(int id, Date departure_date, BigDecimal cost, int train_id, Passenger passenger, int station_id_departure, int station_id_destination, String user_ticket) {
+        this.id = id;
         this.departure_date = departure_date;
+        this.cost = cost;
+        this.train_id = train_id;
+        this.passenger = passenger;
+        this.station_id_departure = station_id_departure;
+        this.station_id_destination = station_id_destination;
+        this.user_ticket = user_ticket;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", departure_date=" + departure_date +
+                ", cost=" + cost +
+                ", train_id=" + train_id +
+                ", passenger=" + passenger +
+                ", station_id_departure=" + station_id_departure +
+                ", station_id_destination=" + station_id_destination +
+                ", user_ticket='" + user_ticket + '\'' +
+                '}';
     }
 }
