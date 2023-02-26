@@ -1,4 +1,4 @@
-package com.rosvitiazev.railways.entities;
+package com.rosvitiazev.railways.domain.entities;
 
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.rosvitiazev.railways.entities;
+package com.rosvitiazev.railways.domain.entities;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
