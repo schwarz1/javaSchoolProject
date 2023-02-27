@@ -83,7 +83,11 @@ public class RoutePart implements Serializable {
         this.routeList = routeList;
     }
 
-    public RoutePart(int id, double price, LocalDate time_passing, int station_id_from, int station_id_to) {
+    public RoutePart(int id,
+                     double price,
+                     LocalDate time_passing,
+                     int station_id_from,
+                     int station_id_to) {
         this.id = id;
         this.price = price;
         this.time_passing = time_passing;

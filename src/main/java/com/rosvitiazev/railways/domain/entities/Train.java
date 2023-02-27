@@ -42,7 +42,6 @@ public class Train implements Serializable {
     public Train() {
     }
 
-
     public int getId() {
         return id;
     }
@@ -99,7 +98,8 @@ public class Train implements Serializable {
         this.ticketList = ticketList;
     }
 
-    public Train(int id, String number, LocalDate departure_time, int count_of_seats, boolean cancelled, int route) {
+    public Train(int id, String number, LocalDate departure_time,
+                 int count_of_seats, boolean cancelled, int route) {
         this.id = id;
         this.number = number;
         this.departure_time = departure_time;

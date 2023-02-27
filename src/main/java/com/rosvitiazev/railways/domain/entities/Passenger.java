@@ -118,7 +118,11 @@ public class Passenger implements Serializable {
         this.ticketList = ticketList;
     }
 
-    public Passenger(String first_name, String last_name, LocalDate birth_date, String mobile_phone, String passport_number) {
+    public Passenger(String first_name,
+                     String last_name,
+                     LocalDate birth_date,
+                     String mobile_phone,
+                     String passport_number) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.birth_date = birth_date;
@@ -137,5 +141,4 @@ public class Passenger implements Serializable {
                 ", passport_number='" + passport_number +
                 '}';
     }
-
 }

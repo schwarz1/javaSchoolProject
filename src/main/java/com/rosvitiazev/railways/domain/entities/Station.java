@@ -81,7 +81,12 @@ public class Station implements Serializable {
         this.station_id_destination = station_id_destination;
     }
 
-    public Station(int id, String name, LocalDate stop_duration, boolean closed, List<Ticket> station_id_departure, List<Ticket> station_id_destination) {
+    public Station(int id,
+                   String name,
+                   LocalDate stop_duration,
+                   boolean closed,
+                   List<Ticket> station_id_departure,
+                   List<Ticket> station_id_destination) {
         this.id = id;
         this.name = name;
         this.stop_duration = stop_duration;

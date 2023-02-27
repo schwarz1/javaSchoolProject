@@ -18,12 +18,10 @@ public class User {
     @Column(name = "id", nullable = false)
     private int id;
 
-
     @NotEmpty
     @Size(min = 0, max = 100)
     @Column(name = "email")
     private String email;
-
 
     @NotEmpty
     @Size(min = 5, max = 20)
@@ -34,7 +32,6 @@ public class User {
     @Size(min = 5, max = 20)
     @Column(name = "role")
     private String role;
-
 
     @Column(name = "enabled")
     private boolean enabled;

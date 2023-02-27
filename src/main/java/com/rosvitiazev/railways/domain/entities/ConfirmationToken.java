@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "confirmation_token")
+
 public class ConfirmationToken implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +80,8 @@ public class ConfirmationToken implements Serializable {
         this.user = user;
     }
 
-    public ConfirmationToken(int id, String token, LocalDate created_at, LocalDate expires_at, LocalDate confirmed_at) {
+    public ConfirmationToken(int id, String token, LocalDate created_at,
+                             LocalDate expires_at, LocalDate confirmed_at) {
         this.id = id;
         this.token = token;
         this.created_at = created_at;

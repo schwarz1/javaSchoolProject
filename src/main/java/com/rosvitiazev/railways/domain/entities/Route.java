@@ -7,6 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "route")
 public class Route implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -24,7 +25,6 @@ public class Route implements Serializable {
     @JoinTable(name = "route_part",
             joinColumns = @JoinColumn(name = "route"), inverseJoinColumns = @JoinColumn(name = "route_part"))
     private Set<RoutePart> parts;
-
 
     public Route() {
     }

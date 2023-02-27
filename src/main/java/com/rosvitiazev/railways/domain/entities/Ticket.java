@@ -61,7 +61,6 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-
     public int getId() {
         return id;
     }
@@ -126,7 +125,14 @@ public class Ticket implements Serializable {
         this.user_ticket = user_ticket;
     }
 
-    public Ticket(int id, Date departure_date, BigDecimal cost, int train_id, Passenger passenger, int station_id_departure, int station_id_destination, String user_ticket) {
+    public Ticket(int id,
+                  Date departure_date,
+                  BigDecimal cost,
+                  int train_id,
+                  Passenger passenger,
+                  int station_id_departure,
+                  int station_id_destination,
+                  String user_ticket) {
         this.id = id;
         this.departure_date = departure_date;
         this.cost = cost;
