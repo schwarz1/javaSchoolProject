@@ -98,14 +98,14 @@ public class Train implements Serializable {
     public void setTicketList(List<Ticket> ticketList) {
         this.ticketList = ticketList;
     }
-    public Train(int id, String number, LocalDate departure_time, int count_of_seats, boolean cancelled, int route, List<Ticket> ticketList) {
+
+    public Train(int id, String number, LocalDate departure_time, int count_of_seats, boolean cancelled, int route) {
         this.id = id;
         this.number = number;
         this.departure_time = departure_time;
         this.count_of_seats = count_of_seats;
         this.cancelled = cancelled;
         this.route = route;
-        this.ticketList = ticketList;
     }
 
     @Override

@@ -66,6 +66,12 @@ public class Route implements Serializable {
         this.parts = parts;
     }
 
+    public Route(int id, int route_connection, RoutePart routePart) {
+        this.id = id;
+        this.route_connection = route_connection;
+        this.routePart = routePart;
+    }
+
     @Override
     public String toString() {
         return "Route{" +

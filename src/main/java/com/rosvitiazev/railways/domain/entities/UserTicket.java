@@ -57,6 +57,12 @@ public class UserTicket {
         this.payment_time = payment_time;
     }
 
+    public UserTicket(int id, int user_id, int ticket_id) {
+        this.id = id;
+        this.user_id = user_id;
+        this.ticket_id = ticket_id;
+    }
+
     @Override
     public String toString() {
         return "UserTicket{" +

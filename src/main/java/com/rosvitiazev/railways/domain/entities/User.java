@@ -93,6 +93,14 @@ public class User {
         this.passengerList = passengerList;
     }
 
+    public User(int id, String email, String password, String role, boolean enabled) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
