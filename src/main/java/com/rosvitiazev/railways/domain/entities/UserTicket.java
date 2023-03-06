@@ -1,11 +1,12 @@
 package com.rosvitiazev.railways.domain.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_ticket")
-public class UserTicket {
+public class UserTicket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

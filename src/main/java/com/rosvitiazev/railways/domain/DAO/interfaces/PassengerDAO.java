@@ -11,7 +11,9 @@ public interface PassengerDAO {
     public List<Passenger> findAll();
 
     public Passenger delete(Passenger entity);
+
     public Passenger update(Passenger entity);
+
     public Passenger findById(int id);
 
 }

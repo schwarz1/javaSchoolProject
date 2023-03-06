@@ -4,7 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "ticket")
@@ -15,10 +16,10 @@ public class Ticket implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Temporal(TemporalType.DATE)
+
     @NotNull
     @Column(name = "departure_date")
-    private Date departure_date;
+    private LocalDate departure_date;
 
     @Column(name = "cost")
     private BigDecimal cost;
@@ -69,11 +70,11 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Date getDeparture_date() {
+    public LocalDate getDeparture_date() {
         return departure_date;
     }
 
-    public void setDeparture_date(Date departure_date) {
+    public void setDeparture_date(LocalDate departure_date) {
         this.departure_date = departure_date;
     }
 
@@ -126,7 +127,7 @@ public class Ticket implements Serializable {
     }
 
     public Ticket(int id,
-                  Date departure_date,
+                  LocalDate departure_date,
                   BigDecimal cost,
                   int train_id,
                   Passenger passenger,

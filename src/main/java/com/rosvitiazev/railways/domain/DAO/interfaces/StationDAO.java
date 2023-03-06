@@ -1,4 +1,9 @@
 package com.rosvitiazev.railways.domain.DAO.interfaces;
 
-public interface StationDAO {
+import com.rosvitiazev.railways.domain.entities.Station;
+
+public interface StationDAO extends GenDAO<Station> {
+
+    public Station getStation(String name);
+
 }
