@@ -1,4 +1,4 @@
-package com.rosvitiazev.railways.domain.DAO.Impl;
+package com.rosvitiazev.railways.domain.DAO.impl;
 
 import com.rosvitiazev.railways.domain.DAO.interfaces.UserTicketDAO;
 import com.rosvitiazev.railways.domain.entities.Ticket;

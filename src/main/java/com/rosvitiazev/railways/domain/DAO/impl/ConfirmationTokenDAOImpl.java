@@ -1,8 +1,7 @@
-package com.rosvitiazev.railways.domain.DAO.Impl;
+package com.rosvitiazev.railways.domain.DAO.impl;
 
 import com.rosvitiazev.railways.domain.DAO.interfaces.ConfirmationTokenDAO;
 import com.rosvitiazev.railways.domain.entities.ConfirmationToken;
-import com.rosvitiazev.railways.domain.entities.Station;
 import com.rosvitiazev.railways.exception.CustomSQLException;
 import org.springframework.stereotype.Repository;
 

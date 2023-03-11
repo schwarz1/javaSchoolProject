@@ -1,7 +1,5 @@
 package com.rosvitiazev.railways.domain.DTO;
 
-import java.util.Map;
-
 public class MapPointDTO {
 
     private double sortfield;
