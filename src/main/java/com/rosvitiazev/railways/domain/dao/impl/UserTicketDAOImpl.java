@@ -1,6 +1,6 @@
-package com.rosvitiazev.railways.domain.DAO.impl;
+package com.rosvitiazev.railways.domain.dao.impl;
 
-import com.rosvitiazev.railways.domain.DAO.interfaces.UserTicketDAO;
+import com.rosvitiazev.railways.domain.dao.interfaces.UserTicketDAO;
 import com.rosvitiazev.railways.domain.entities.Ticket;
 import com.rosvitiazev.railways.domain.entities.UserTicket;
 import com.rosvitiazev.railways.exception.CustomSQLException;

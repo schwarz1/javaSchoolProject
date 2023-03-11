@@ -1,7 +1,7 @@
-package com.rosvitiazev.railways.domain.DAO.impl;
+package com.rosvitiazev.railways.domain.dao.impl;
 
-import com.rosvitiazev.railways.domain.DAO.interfaces.StationDAO;
-import com.rosvitiazev.railways.domain.entities.Station;
+import com.rosvitiazev.railways.domain.dao.interfaces.RouteDAO;
+import com.rosvitiazev.railways.domain.entities.Route;
 import com.rosvitiazev.railways.exception.CustomSQLException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,65 +12,66 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository("stationDAO")
-public class StationDAOImpl implements StationDAO {
+
+@Repository("routeDAO")
+public class RouteDAOImpl implements RouteDAO {
 
     @PersistenceContext
     private EntityManager manager;
 
-    public StationDAOImpl() {
+    public RouteDAOImpl() {
     }
 
     @Override
     @Transactional
-    public Station save(Station entity) {
+    public Route save(Route entity) {
         try {
             manager.persist(entity);
         } catch (PersistenceException ex) {
-            throw new CustomSQLException("Can't save station: " + ex);
+            throw new CustomSQLException("Can't save route: " + ex);
         }
         return entity;
     }
 
     @Override
-    public List<Station> findAll() {
-        TypedQuery<Station> query = manager.createNamedQuery("Station.GetAllStationList", Station.class);
-        List<Station> result = query.getResultList();
+    public List<Route> findAll() {
+        TypedQuery<Route> query = manager.createNamedQuery("Route.GetAllRouteList", Route.class);
+        List<Route> result = query.getResultList();
         return result;
     }
 
     @Override
-    public Station delete(Station entity) {
+    public Route delete(Route entity) {
         try {
             manager.remove(entity);
         } catch (PersistenceException ex) {
-            throw new CustomSQLException("Can't remove station: " + ex);
+            throw new CustomSQLException("Can't remove route: " + ex);
         }
         return entity;
     }
 
     @Override
-    public Station update(Station entity) {
+    public Route update(Route entity) {
         try {
             manager.merge(entity);
         } catch (PersistenceException ex) {
-            throw new CustomSQLException("Can't update station: " + ex);
+            throw new CustomSQLException("Can't update route: " + ex);
         }
         return entity;
     }
 
     @Override
-    public Station findById(int id) {
-        Station result = manager.find(Station.class, id);
+    public Route findById(int id) {
+        Route result = manager.find(Route.class, id);
         return result;
     }
 
     @Override
-    public Station getStation(String name) {
-        Station result;
+    public Route getRoute(int id) {
+        Route result;
         try {
-            TypedQuery<Station> query = manager.createNamedQuery("Station.GetStationByName", Station.class);
-            query.setParameter("stationName", name);
+            TypedQuery<Route> query = manager.createNamedQuery("Route.GetRouteById", Route.class);
+            query.setParameter("routeId", id);
             result = query.getSingleResult();
         } catch (PersistenceException ex) {
             throw new CustomSQLException(ex.getMessage());
@@ -79,3 +80,4 @@ public class StationDAOImpl implements StationDAO {
     }
 
 }
+

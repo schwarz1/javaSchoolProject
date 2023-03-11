@@ -1,7 +1,7 @@
-package com.rosvitiazev.railways.domain.DAO.impl;
+package com.rosvitiazev.railways.domain.dao.impl;
 
-import com.rosvitiazev.railways.domain.DAO.interfaces.RouteDAO;
-import com.rosvitiazev.railways.domain.entities.Route;
+import com.rosvitiazev.railways.domain.dao.interfaces.RoutePartDAO;
+import com.rosvitiazev.railways.domain.entities.RoutePart;
 import com.rosvitiazev.railways.exception.CustomSQLException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,19 +12,18 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-
-@Repository("routeDAO")
-public class RouteDAOImpl implements RouteDAO {
+@Repository("routePartDAO")
+public class RoutePartDAOImpl implements RoutePartDAO {
 
     @PersistenceContext
     private EntityManager manager;
 
-    public RouteDAOImpl() {
+    public RoutePartDAOImpl() {
     }
 
     @Override
     @Transactional
-    public Route save(Route entity) {
+    public RoutePart save(RoutePart entity) {
         try {
             manager.persist(entity);
         } catch (PersistenceException ex) {
@@ -34,44 +33,45 @@ public class RouteDAOImpl implements RouteDAO {
     }
 
     @Override
-    public List<Route> findAll() {
-        TypedQuery<Route> query = manager.createNamedQuery("Route.GetAllRouteList", Route.class);
-        List<Route> result = query.getResultList();
+    public List<RoutePart> findAll() {
+        TypedQuery<RoutePart> query = manager.createNamedQuery("Route.GetAllRoutePartList", RoutePart.class);
+        List<RoutePart> result = query.getResultList();
         return result;
     }
 
     @Override
-    public Route delete(Route entity) {
+    public RoutePart delete(RoutePart entity) {
         try {
             manager.remove(entity);
         } catch (PersistenceException ex) {
-            throw new CustomSQLException("Can't remove route: " + ex);
+            throw new CustomSQLException("Can't remove routePart: " + ex);
         }
         return entity;
     }
 
     @Override
-    public Route update(Route entity) {
+    public RoutePart update(RoutePart entity) {
         try {
             manager.merge(entity);
         } catch (PersistenceException ex) {
-            throw new CustomSQLException("Can't update route: " + ex);
+            throw new CustomSQLException("Can't update routePart: " + ex);
         }
         return entity;
     }
 
     @Override
-    public Route findById(int id) {
-        Route result = manager.find(Route.class, id);
+    public RoutePart findById(int id) {
+        RoutePart result = manager.find(RoutePart.class, id);
         return result;
     }
 
     @Override
-    public Route getRoute(int id) {
-        Route result;
+    public RoutePart getStationIdFromTo(int stationIdFrom, int stationIdTo) {
+        RoutePart result;
         try {
-            TypedQuery<Route> query = manager.createNamedQuery("Route.GetRouteById", Route.class);
-            query.setParameter("routeId", id);
+            TypedQuery<RoutePart> query = manager.createNamedQuery("Route.GetStationIdFromTo", RoutePart.class);
+            query.setParameter("stationIdFrom", stationIdFrom);
+            query.setParameter("stationIdTo", stationIdTo);
             result = query.getSingleResult();
         } catch (PersistenceException ex) {
             throw new CustomSQLException(ex.getMessage());
@@ -80,4 +80,3 @@ public class RouteDAOImpl implements RouteDAO {
     }
 
 }
-

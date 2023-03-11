@@ -1,4 +1,4 @@
-package com.rosvitiazev.railways.domain.DAO.interfaces;
+package com.rosvitiazev.railways.domain.dao.interfaces;
 
 import com.rosvitiazev.railways.domain.entities.ConfirmationToken;
 

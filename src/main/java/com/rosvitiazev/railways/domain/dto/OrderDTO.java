@@ -1,4 +1,4 @@
-package com.rosvitiazev.railways.domain.DTO;
+package com.rosvitiazev.railways.domain.dto;
 
 public class OrderDTO {
 

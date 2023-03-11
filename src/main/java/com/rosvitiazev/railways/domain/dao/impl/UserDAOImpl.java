@@ -1,7 +1,7 @@
-package com.rosvitiazev.railways.domain.DAO.impl;
+package com.rosvitiazev.railways.domain.dao.impl;
 
 
-import com.rosvitiazev.railways.domain.DAO.interfaces.UserDAO;
+import com.rosvitiazev.railways.domain.dao.interfaces.UserDAO;
 import com.rosvitiazev.railways.domain.entities.User;
 import com.rosvitiazev.railways.exception.CustomSQLException;
 import org.springframework.stereotype.Repository;
