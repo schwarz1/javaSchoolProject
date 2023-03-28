@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 
@@ -50,6 +51,12 @@ public class Ticket implements Serializable {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "train_id")
     private Train train;
+
+    public Ticket(Passenger passenger, String number, LocalDate departure_date) {
+    }
+
+    public Ticket(Passenger passenger, String number, Instant departureDate) {
+    }
 
     public Train getTrain() {
         return train;

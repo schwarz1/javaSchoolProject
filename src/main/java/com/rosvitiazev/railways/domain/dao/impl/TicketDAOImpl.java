@@ -66,7 +66,7 @@ public class TicketDAOImpl implements TicketDAO {
 
     @Override
     public int countTicketOnTrain(String trainNumber, LocalDate departure_date) {
-        String query = "Select count(t) from Ticket t where t.trainNumber = :trainNumber and t.departure_date = :departure_date";
+        String query = "Select count(t) from Ticket t where t.number = :trainNumber and t.departure_date = :departure_date";
         Query q = manager.createQuery(query);
 
         q.setParameter("trainNumber", trainNumber);
@@ -93,10 +93,16 @@ public class TicketDAOImpl implements TicketDAO {
     @Override
     public List<Ticket> getTicketByPassengerID(int passenger_id) {
 
-        String query = "from Ticket where passenger.passenger_id = :passenger_id";
+        String query = "from Ticket where passenger.id = :passenger_id";
         Query q = manager.createQuery(query);
         q.setParameter("passenger_id", passenger_id);
         return q.getResultList();
     }
+
+    @Override
+    public int countTicketsOnTrain(String valueOf, LocalDate departure_dateFormat) {
+        return 0;
+    }
+
 
 }

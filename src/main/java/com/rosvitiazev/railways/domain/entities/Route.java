@@ -8,6 +8,7 @@ import java.util.Set;
 @Table(name = "route")
 public class Route implements Serializable {
 
+    public static String login;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -15,7 +16,7 @@ public class Route implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "route_connection")
-    private int route_connection;
+    private Set<Route> route_connection;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "route_part_id")
@@ -29,9 +30,8 @@ public class Route implements Serializable {
     public Route() {
     }
 
-    public Route(int id, int route_connection) {
+    public Route(int id) {
         this.id = id;
-        this.route_connection = route_connection;
     }
 
     public int getId() {
@@ -42,13 +42,10 @@ public class Route implements Serializable {
         this.id = id;
     }
 
-    public int getRoute_connection() {
+    public Set<Route> getRoute_connection() {
         return route_connection;
     }
 
-    public void setRoute_connection(int route_connection) {
-        this.route_connection = route_connection;
-    }
 
     public RoutePart getRoutePart() {
         return routePart;
@@ -66,9 +63,8 @@ public class Route implements Serializable {
         this.parts = parts;
     }
 
-    public Route(int id, int route_connection, RoutePart routePart) {
+    public Route(int id, RoutePart routePart) {
         this.id = id;
-        this.route_connection = route_connection;
         this.routePart = routePart;
     }
 

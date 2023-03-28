@@ -1,31 +1,31 @@
 package com.rosvitiazev.railways.domain.dao.impl;
 
 
+import ch.qos.logback.classic.Logger;
 import com.rosvitiazev.railways.domain.dao.interfaces.UserDAO;
 import com.rosvitiazev.railways.domain.entities.User;
 import com.rosvitiazev.railways.exception.CustomSQLException;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
+
 
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
 
     @PersistenceContext
     private EntityManager manager;
+    private Logger logger;
 
     @Override
-    public User save(User entity) {
+    public User save(User user) {
         try {
-            manager.persist(entity);
+            manager.persist(user);
         } catch (PersistenceException ex) {
             throw new CustomSQLException("Can't save user: " + ex);
         }
-        return entity;
+        return user;
     }
 
     @Override
@@ -66,7 +66,13 @@ public class UserDAOImpl implements UserDAO {
     public User findByEmail(String email) {
         TypedQuery<User> query = manager.createNamedQuery("User.findByEmail", User.class);
         query.setParameter("email", email);
-        User result = query.getSingleResult();
-        return result;
+        User result = null;
+        try {
+            result = (User) query.getSingleResult();
+        }
+        catch (NoResultException noResultException) {
+            logger.info(noResultException.toString());
+        }
+       return result;
     }
 }

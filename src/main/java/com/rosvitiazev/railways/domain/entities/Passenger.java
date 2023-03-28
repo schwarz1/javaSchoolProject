@@ -46,12 +46,15 @@ public class Passenger implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user_id;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Ticket> ticketList;
 
     public Passenger() {
+    }
+
+    public Passenger(String firstName, String lastName, LocalDate birthDateFormat) {
     }
 
     public int getId() {
@@ -103,11 +106,11 @@ public class Passenger implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return user_id;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user_id = user;
     }
 
     public Set<Ticket> getTicketList() {

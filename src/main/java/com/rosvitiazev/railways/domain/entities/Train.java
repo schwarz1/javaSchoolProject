@@ -42,6 +42,10 @@ public class Train implements Serializable {
     public Train() {
     }
 
+    public Train(int id, String number, int count_of_seats) {
+
+    }
+
     public int getId() {
         return id;
     }

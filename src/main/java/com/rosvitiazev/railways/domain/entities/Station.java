@@ -33,6 +33,9 @@ public class Station implements Serializable {
 
     public Station() {}
 
+    public Station(String name) {
+    }
+
     public int getId() {
         return id;
     }
