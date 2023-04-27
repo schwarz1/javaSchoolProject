@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Train</title>
+</head>
+<body>
+<h1>Edit Train</h1>
+<form action="/trains-list/{id}" method="post" th:object="${train}">
+  <input type="hidden" id="id" th:field="*{id}">
+  <label for="name">Name:</label>
+  <input type="text" id="name" th:field="*{name}" required><br><br>
+  <label for="departureTime">Departure Time:</label>
+  <input type="text" id="departureTime" th:field="*{departureTime}" required><br><br>
+</form>
+</body>
+</html>

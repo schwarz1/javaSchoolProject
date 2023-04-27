@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Train</title>
+</head>
+<body>
+<h1>Create Train</h1>
+<form action="/trains-list" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+  <label for="departureTime">Departure Time:</label>
+  <input type="text" id="departureTime" name="departureTime" required><br><br>
+  <!-- Add more input fields as needed -->
+  <button type="submit">Create</button>
+</form>
+<a href="/trains-list">Back to Trains</a>
+</body>
+</html>
