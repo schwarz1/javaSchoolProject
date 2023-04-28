@@ -36,7 +36,7 @@ public class TrainController {
     @PostMapping("/trains-list")
     public String createTrain(@ModelAttribute Train train) {
         trainService.create(train);
-        return "train/redirect:/trains";
+        return "redirect:/trains-list";
     }
 
     @GetMapping("/trains-list/{id}/edit")
@@ -48,12 +48,12 @@ public class TrainController {
     @PostMapping("/trains-list/{id}")
     public String updateTrain(@PathVariable Long id, @ModelAttribute Train train) {
         trainService.update(id, train);
-        return "redirect:train/trains";
+        return "redirect:/trains-list";
     }
 
     @GetMapping("/trains-list/{id}/delete")
     public String deleteTrain(@PathVariable Long id) {
         trainService.delete(id);
-        return "redirect:train//trains";
+        return "redirect:/trains-list";
     }
 }

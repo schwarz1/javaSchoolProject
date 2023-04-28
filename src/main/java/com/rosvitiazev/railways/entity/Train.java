@@ -20,10 +20,14 @@ public class Train {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name="name")
+    private String name;
+
     @Column(name="number")
     private String number;
-    @Column(name="seats_number")
-    private Integer seatsNumber;
+
+
 
     @ManyToOne
     @JoinColumn(name = "route_sheet_id")
@@ -34,5 +38,4 @@ public class Train {
 
     @OneToMany(mappedBy = "train")
     private Set<Ticket> tickets = new HashSet<>();
-
 }
