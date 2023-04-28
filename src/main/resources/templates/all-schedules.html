@@ -88,7 +88,6 @@
   <input type="date" id="departureTime" name="departureTime" required>
   <input type="submit" value="Search" class="btn btn-success">
 </form>
-
 <!-- Table to display schedules -->
 <table>
   <!-- Table headers -->
@@ -108,8 +107,8 @@
     <td th:text="${schedule.departureStation.name}"></td>
     <td th:text="${schedule.stationArrival.name}"></td>
     <td th:text="${schedule.departureTime}"></td>
-    <td th:text="${schedule.arrivalTime}">
-    </td><td th:text="${schedule.train.getNumber()}"></td>
+    <td th:text="${schedule.arrivalTime}"></td>
+    <td th:text="${schedule.train.getNumber()}"></td>
     <td><a class="btn btn-primary" th:href="@{ticket-buy/{id}(id=${schedule.ticket.id})}">Buy</a></td>
   </tr>
   </tbody>
