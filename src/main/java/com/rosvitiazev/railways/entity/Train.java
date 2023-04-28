@@ -27,7 +27,8 @@ public class Train {
     @Column(name="number")
     private String number;
 
-
+    @Column(name="departure_time")
+    private String departureTime;
 
     @ManyToOne
     @JoinColumn(name = "route_sheet_id")
