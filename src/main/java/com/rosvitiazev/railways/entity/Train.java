@@ -14,29 +14,19 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="trains")
+@Table(name = "trains")
 public class Train {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name="name")
-    private String name;
-
-    @Column(name="number")
+    @Column(name = "number")
     private String number;
-
-    @Column(name="departure_time")
-    private String departureTime;
-
-    @ManyToOne
-    @JoinColumn(name = "route_sheet_id")
-    private RouteSheet routeSheet;
-
-    @OneToMany(mappedBy = "train")
-    private Set<Schedule> schedules = new HashSet<>();
-
-    @OneToMany(mappedBy = "train")
+    @Column(name = "seats_number")
+    private Integer seatsNumber;
+    @OneToOne(mappedBy = "train")
+    private Schedule schedules;
+    @OneToMany(mappedBy = "train",cascade = CascadeType.ALL)
     private Set<Ticket> tickets = new HashSet<>();
+
 }

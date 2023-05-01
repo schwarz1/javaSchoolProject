@@ -1,7 +1,7 @@
 package com.rosvitiazev.railways.controller;
 
 import com.rosvitiazev.railways.entity.Station;
-import com.rosvitiazev.railways.service.impl.StationService;
+import com.rosvitiazev.railways.service.impl.StationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,41 +11,47 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/stations")
 public class StationController {
-    private final StationService stationService;
+    private final StationServiceImpl stationService;
 
-    @PostMapping
-    public String createStation(@RequestBody Station station) {
+    @GetMapping("/stations")
+    public String getAllStations(Model model) {
+        List<Station> stations = stationService.getAllStations();
+        model.addAttribute("stations", stations);
+        return "station/all-stations";
+    }
+
+    @GetMapping("/create")
+    public String createStationForm(Model model) {
+        model.addAttribute("station", new Station());
+        return "station/create-station";
+    }
+
+    @PostMapping("/create-station")
+    public String createStation(Station station) {
         stationService.createStation(station);
         return "redirect:/stations";
     }
 
-    @GetMapping("/{id}")
-    public String getStationById(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateStationForm(@PathVariable("id") Long id, Model model) {
         Station station = stationService.getStationById(id);
         model.addAttribute("station", station);
-        return "station-details";
+        return "station/update-station";
     }
 
-    @GetMapping
-    public String getAllStations(Model model) {
-        List<Station> stations = stationService.getAllStations();
-        model.addAttribute("stations", stations);
-        return "all-stations";
-    }
-
-    @PutMapping("/{id}")
-    public String updateStation(@PathVariable("id") Long id, @RequestBody Station station) {
-        station.setId(id);
+    @PostMapping("/{id}")
+    public String updateStation(Station station) {
         stationService.updateStation(station);
         return "redirect:/stations";
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("stations-delete/{id}")
     public String deleteStation(@PathVariable("id") Long id) {
         stationService.deleteStation(id);
         return "redirect:/stations";
     }
 }
+
+
 

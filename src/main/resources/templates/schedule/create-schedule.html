@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Schedule</title>
+  <style>
+    input[type="datetime-local"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: blue;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .button {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-top: 10px;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+    .search-form {
+      margin-top: 20px;
+    }
+
+    .search-form label {
+      margin-right: 5px;
+    }
+    .search-form input[type="text"] {
+      margin-right: 5px;
+    }
+    .search-form .btn {
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+<h1>Create Schedule</h1>
+<form th:action="@{/create-schedule}" th:object="${schedule}" method="post">
+  <table>
+    <tr>
+      <td>
+        <label for="departureStationSelect">Departure Station:</label>
+      </td>
+      <td>
+        <select id="departureStationSelect" name="departureStation"
+                th:field="${schedule.departureStation}">
+          <option value="">Choose a station</option>
+          <th:block th:each="station : ${allStations}">
+            <option th:value="${station.id}" th:text="${station.name}"
+                    th:selected="${station.id == schedule.departureStation?.id}">
+            </option>
+          </th:block>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="stationArrival">Arrival Station:</label>
+      </td>
+      <td>
+        <select id="stationArrival" name="stationArrival"
+                th:field="${schedule.arrivalStation}">
+          <option value="">Choose a station</option>
+          <th:block th:each="station : ${allStations}">
+            <option th:value="${station.id}" th:text="${station.name}"
+                    th:selected="${station.id == schedule.arrivalStation?.id}">
+
+            </option>
+          </th:block>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="departureTime">Departure Time:</label>
+      </td>
+      <td>
+        <input type="datetime-local" id="departureTime" name="departureTime"
+               th:field="${schedule.departureTime}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="arrivalTime">Arrival Time:</label>
+      </td>
+      <td><input type="datetime-local" id="arrivalTime" name="arrivalTime" th:field="${schedule.arrivalTime}"/></td>
+    </tr>
+    <tr>
+      <td>
+        <label for="trainSelect">Train:</label>
+      </td>
+      <td>
+        <select id="trainSelect" name="train" th:field="${schedule.train}">
+          <option value="">Choose a train</option>
+          <th:block th:each="train : ${allTrains}">
+            <option th:value="${train.id}" th:text="${train.number}"
+                    th:selected="${train.id == schedule.train?.id}"></option>
+          </th:block>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+
+        <button class="button" type="submit">Create Schedule</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

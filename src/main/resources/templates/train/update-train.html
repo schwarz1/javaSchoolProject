@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Train</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: blue;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-top: 10px;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .search-form {
+      margin-top: 20px;
+    }
+
+    .search-form label {
+      margin-right: 5px;
+    }
+
+    .search-form input[type="text"] {
+      margin-right: 5px;
+    }
+
+    .search-form .btn {
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+<h1>Update Train</h1>
+<form th:action="@{/update-train}" th:object="${train}" method="post">
+  <input type="hidden" th:field="*{id}"/>
+  <table>
+    <tr>
+      <td><label for="number">Train Number:</label></td>
+      <td><input type="text" id="number" name="number" th:field="${train.number}"/></td>
+    </tr>
+    <tr>
+      <td><label for="seatsNumber">Number of Seats:</label></td>
+      <td><input type="number" id="seatsNumber" name="seatsNumber" th:field="${train.seatsNumber}"/></td>
+      <!--  </tr>
+        <td><label>Choose a schedule:</label></td>
+        <td>
+          <th:block th:each="schedule : ${allSchedules}">
+            <input type="radio" name="schedule.id" th:value="${schedule.id}"
+                   th:id="'schedule-' + ${schedule.id}"
+                   th:checked="${train.schedule?.id == schedule.id}"/>
+            <label th:for="'schedule-' + ${schedule.id}">
+              <span th:text="${schedule.departureStation.name} + ' - ' + ${schedule.arrivalStation.name} + ' / '"></span>
+              <span th:text="${#temporals.format(schedule.departureTime,'dd-MM-yyyy, HH:mm')} + ' - ' + ${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}"></span>
+            </label>
+          </th:block>
+        </td>
+        <tr>-->
+      <td colspan="2"><button type="submit">Update Train</button></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

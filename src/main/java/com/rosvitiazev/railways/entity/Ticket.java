@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -24,23 +22,27 @@ public class Ticket {
     private Double price;
     @Column(name="seat_number")
     private Integer seatNumber;
+    @Column(name="free_seats")
+    private Boolean freeSeats;
 
     @ManyToOne
+    @JoinColumn(name = "train_id")
+    private Train train;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passenger_id")
+    private Passenger passenger;
+
+  /*  @ManyToOne
+    @JoinColumn(name = "schedules_id")
+    private Schedule schedule;*/
+      /*  @ManyToOne
     @JoinColumn(name = "departure_station_id")
     private Station departureStation;
 
     @ManyToOne
     @JoinColumn(name = "finish_station_id")
     private Station arrivalStation;
-
-    @ManyToOne
-    @JoinColumn(name = "train_id")
-    private Train train;
-
-
-    @OneToOne
-    @JoinColumn(name = "passenger_id")
-    private Passenger passenger;
-    @OneToMany(mappedBy = "ticket")
-    private Set<Schedule> schedules= new HashSet<>();
+*/
 }
+

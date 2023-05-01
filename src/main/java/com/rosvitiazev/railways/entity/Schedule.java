@@ -28,13 +28,9 @@ public class Schedule {
     private Station departureStation;
     @ManyToOne
     @JoinColumn(name = "station_arrival_id")
-    private Station stationArrival;
-    @ManyToOne
+    private Station arrivalStation;
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "train_id")
     private Train train;
-
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
 
 }

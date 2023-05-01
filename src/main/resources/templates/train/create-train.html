@@ -1,30 +1,97 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title>Create Train</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<html xmlns:th="http://www.thymeleaf.org">
+<head><style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: blue;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-top: 10px;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .search-form {
+        margin-top: 20px;
+    }
+
+    .search-form label {
+        margin-right: 5px;
+    }
+
+    .search-form input[type="text"] {
+        margin-right: 5px;
+    }
+
+    .search-form .btn {
+        margin-top: 10px;
+    }
+
+    .button:hover {
+        background-color: darkblue;
+    }
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Train</title>
 </head>
 <body>
-<div class="container mt-5">
-  <h1>Create Train</h1>
-  <form action="/trains-list" method="post">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="departureTime">Departure Time:</label>
-      <input type="text" class="form-control" id="departureTime" name="departureTime" required>
-    </div>
-    <!-- Add more input fields as needed -->
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a href="/trains-list" class="btn btn-secondary">Back to Trains</a>
-  </form>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<h1>Create Train</h1>
+<form action="/trains-list" method="post">
+    <table>
+        <tr>
+            <td><label for="number">Number:</label></td>
+            <td><input type="text" id="number" name="number" required></td>
+        </tr>
+        <tr>
+            <td><label for="seatsNumber">Seat Number:</label></td>
+            <td><input type="text" id="seatsNumber" name="seatsNumber" required></td>
+        </tr>
+        <!--  <tr>
+            <td><label>Choose a schedule:</label></td>
+            <td>
+              <th:block th:each="schedule : ${allSchedules}">
+                <input type="radio" name="schedule.id" th:value="${schedule.id}"
+                       th:id="'schedule-' + ${schedule.id}"
+                       th:checked="${train.schedule?.id == schedule.id}"/>
+                <label th:for="'schedule-' + ${schedule.id}">
+                  <span th:text="${schedule.departureStation.name} + ' - ' + ${schedule.arrivalStation.name} + ' / '"></span>
+                  <span th:text="${#temporals.format(schedule.departureTime, 'dd-MM-yyyy, HH:mm')} + ' - ' + ${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}"></span>
+                </label>
+              </th:block>
+            </td>
+          </tr>-->
+        <tr>
+            <td colspan="2"><button class="button" type="submit">Create Train</button></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

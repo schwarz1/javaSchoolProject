@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    color: blue;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  .search-form {
+    margin-top: 20px;
+  }
+
+  .search-form label {
+    margin-right: 5px;
+  }
+  .search-form input[type="text"] {
+    margin-right: 5px;
+  }
+  .search-form .btn {
+    margin-top: 10px;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+  <meta charset="UTF-8">
+  <title>Free Seats on Train</title>
+</head>
+<body>
+<h1>Free Seats on Train</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Train Number</th>
+    <th>Seat Number</th>
+    <th>Price</th>
+    <th>Buy</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="seat : ${freeSeats}">
+    <td th:text="${seat.id}"></td>
+    <td th:text="${seat.train.number}"></td>
+    <td th:text="${seat.seatNumber}"></td>
+    <td th:text="${seat.price}"></td>
+    <td><a class="button" th:href="@{/create/{ticketId}(ticketId=${seat.id})}">Buy</a></td>
+
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
+
+
+
+

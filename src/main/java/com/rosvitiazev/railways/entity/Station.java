@@ -12,17 +12,15 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@jakarta.persistence.Entity
-@jakarta.persistence.Table(name = "stations")
+@Entity
+@Table(name = "stations")
 public class Station {
-    @jakarta.persistence.Id
-    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @jakarta.persistence.Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    @jakarta.persistence.Column(name = "name")
+    @Column(name = "name")
     private String name;
-    @jakarta.persistence.ManyToMany(mappedBy = "stations")
-    private Set<RouteSheet> routeSheets = new HashSet<>();
 
     @OneToMany(mappedBy = "departureStation")
     private Set<Schedule> schedules = new HashSet<>();

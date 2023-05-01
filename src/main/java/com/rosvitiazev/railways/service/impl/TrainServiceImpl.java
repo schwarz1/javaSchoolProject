@@ -3,6 +3,7 @@ package com.rosvitiazev.railways.service.impl;
 import com.rosvitiazev.railways.entity.Train;
 import com.rosvitiazev.railways.exception.ResourceNotFoundException;
 import com.rosvitiazev.railways.repository.TrainRepository;
+import com.rosvitiazev.railways.service.TrainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,30 +15,47 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TrainServiceImpl {
-    public final TrainRepository trainRepository;
+public class TrainServiceImpl implements TrainService {
+    private final TrainRepository trainRepository;
 
-    public void create(Train train){
+
+    @Override
+    public void create(Train train) {
         trainRepository.save(train);
     }
-    public void update(Long id, Train train){
-        Train newTrain = trainRepository.findById(id).orElseThrow((() ->
-                new ResourceNotFoundException("Train", "id",id )));
+
+    @Override
+    public void update(Train train) {
+
         trainRepository.save(train);
     }
-    public Train getTrainId(Long id){
+
+    @Override
+    public Train getTrainId(Long id) {
         return trainRepository.findById(id).orElseThrow((() ->
-                new ResourceNotFoundException("Train", "id",id )));
+                new ResourceNotFoundException("Train", "id", id)));
     }
-    public List<Train> getTrainsAll(){
+
+    @Override
+    public List<Train> getTrainsAll() {
         Sort sort = Sort.by("number").ascending();
         Pageable pageable = PageRequest.of(0, 1000, sort);
-        Page<Train> trainRepositoryAll =trainRepository.findAll(pageable);
+        Page<Train> trainRepositoryAll = trainRepository.findAll(pageable);
         return trainRepositoryAll.getContent();
     }
 
-    public void delete(Long id){
+    @Override
+    public void delete(Long id) {
         trainRepository.delete(trainRepository.findById(id).orElseThrow((() ->
-                new ResourceNotFoundException("Train", "id",id ))));
+                new ResourceNotFoundException("Train", "id", id))));
+    }
+
+    @Override
+    public Train getTrainByNumber(String number) {
+        try {
+            return trainRepository.getTrainByNumber(number);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Train", "number", Long.valueOf(number));
+        }
     }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title> <style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    color: blue;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  .search-form {
+    margin-top: 20px;
+  }
+
+  .search-form label {
+    margin-right: 5px;
+  }
+  .search-form input[type="text"] {
+    margin-right: 5px;
+  }
+  .search-form .btn {
+    margin-top: 10px;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Purchase error</title>
+
+</head>
+<body>
+<div class="container">
+  <h1>Purchase error</h1>
+  <p>This user is already registered on this flight.</p>
+</div>
+<a class="button" href="/schedules">Back to All Schedules</a>
+</body>
+</html>

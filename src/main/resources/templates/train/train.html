@@ -1,58 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Train Details</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-  <h1 class="my-5">Train Details</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <p class="font-weight-bold">Train ID:</p>
-    </div>
-    <div class="col-md-6">
-      <p th:text="${train.id}"></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <p class="font-weight-bold">Name:</p>
-    </div>
-    <div class="col-md-6">
-      <p th:text="${train.name}"></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <p class="font-weight-bold">Departure Time:</p>
-    </div>
-    <div class="col-md-6">
-      <p th:text="${train.departureTime}"></p>
-    </div>
-  </div>
-  <!-- Add more train details as needed -->
-  <div class="row">
-    <div class="col-md-12">
-      <a class="btn btn-primary mr-2" href="/trains-list">Back to Trains</a>
-      <a class="btn btn-warning mr-2"
-         th:href="@{/trains/{id}/edit(id=${train.id})}">Edit</a>
-      <a class="btn btn-danger"
-         th:href="@{/trains/{id}/delete(id=${train.id})}">Delete</a>
-    </div>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+<h1>Train Details</h1>
+<p>Train ID: <span th:text="${train.id}"></span></p>
+<p>Name: <span th:text="${train.name}"></span></p>
+<p>Departure Time: <span th:text="${train.departureTime}"></span></p>
+<!-- Add more train details as needed -->
+<a href="/trains-list">Back to Trains</a>
+<a href="/trains-list/{id}/edit" th:href="@{/trains/{id}/edit(id=${train.id})}">Edit</a>
+<a href="/trains-list/{id}/delete" th:href="@{/trains/{id}/delete(id=${train.id})}">Delete</a>
 </body>
 </html>

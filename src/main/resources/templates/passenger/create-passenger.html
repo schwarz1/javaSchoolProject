@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Title</title> <style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    color: blue;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  .search-form {
+    margin-top: 20px;
+  }
+
+  .search-form label {
+    margin-right: 5px;
+  }
+  .search-form input[type="text"] {
+    margin-right: 5px;
+  }
+  .search-form .btn {
+    margin-top: 10px;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Passenger</title>
+</head>
+<body>
+<h1>Create Passenger</h1>
+<form action="/create-passenger" method="post">
+  <input type="hidden" name="ticket.id" th:value="${ticket.id}">
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" name="lastName" required>
+  <br>
+
+  <label for="firstName">first Name:</label>
+  <input type="text" id="firstName" name="firstName" required>
+  <br>
+
+  <label for="passportNumber">Passport Number:</label>
+  <input type="text" id="passportNumber" name="passportNumber" required>
+  <br>
+
+  <label for="mobilePhone">Mobile Phone:</label>
+  <input type="tel" id="mobilePhone" name="mobilePhone" required>
+  <br>
+  <input class="button" type="submit" value="Create Passenger">
+
+  <a class="button" href="/schedules">Back to All Schedules</a>
+
+</form>
+</body>
+</html>

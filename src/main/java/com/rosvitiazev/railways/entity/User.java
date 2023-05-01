@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.DecimalMin;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,22 +16,30 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@jakarta.persistence.Entity
-@jakarta.persistence.Table(name = "users")
+@Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "login"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
-    @jakarta.persistence.Id
-    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @jakarta.persistence.Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    @jakarta.persistence.Column(name = "login")
+    @Column(name = "login",unique = true)
+    @NotBlank(message = "Login cannot be empty")
     private String login;
-    @jakarta.persistence.Column(name = "password")
+    @Column(name = "password")
+    @NotBlank(message = "Password cannot be empty")
     private String password;
-    @jakarta.persistence.Column(name = "email")
+    @Column(name = "email",unique = true)
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email is not correct")
     private String email;
-    @jakarta.persistence.Column(name = "balance")
-    private Float balance;
-    @jakarta.persistence.Column(name = "role")
+    @Column(name = "balance")
+    @DecimalMin(value = "0.0", message = "Balance must be non-negative")
+    private Double balance;
+    @Column(name = "role")
     private String role;
 
     @OneToMany(mappedBy = "user")

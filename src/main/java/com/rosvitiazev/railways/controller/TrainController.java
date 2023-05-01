@@ -1,7 +1,7 @@
 package com.rosvitiazev.railways.controller;
 
 import com.rosvitiazev.railways.entity.Train;
-import com.rosvitiazev.railways.service.impl.TrainServiceImpl;
+import com.rosvitiazev.railways.service.TrainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class TrainController {
-    private final TrainServiceImpl trainService;
+    private final TrainService trainService;
+
+
 
     @GetMapping("/trains-list")
     public String getAllTrains(Model model) {
@@ -36,22 +38,22 @@ public class TrainController {
     @PostMapping("/trains-list")
     public String createTrain(@ModelAttribute Train train) {
         trainService.create(train);
-        return "redirect:/trains-list";
+        return "redirect:trains-list";
     }
 
-    @GetMapping("/trains-list/{id}/edit")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    @GetMapping("/train-update/{id}")
+    public String trainUpdateForm(@PathVariable Long id, Model model) {
         model.addAttribute("train", trainService.getTrainId(id));
-        return "train/edit-train";
+        return "train/update-train";
     }
 
-    @PostMapping("/trains-list/{id}")
-    public String updateTrain(@PathVariable Long id, @ModelAttribute Train train) {
-        trainService.update(id, train);
-        return "redirect:/trains-list";
+    @PostMapping("/update-train")
+    public String updateTrain( @ModelAttribute Train train) {
+        trainService.update( train);
+        return "redirect:trains-list";
     }
 
-    @GetMapping("/trains-list/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteTrain(@PathVariable Long id) {
         trainService.delete(id);
         return "redirect:/trains-list";

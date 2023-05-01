@@ -3,6 +3,17 @@ package com.rosvitiazev.railways.repository;
 import com.rosvitiazev.railways.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findByLoginOrEmail(String username, String email);
+
+    Optional<User> findByLogin(String username);
+
+    Boolean existsByLogin(String username);
+
+    Boolean existsByEmail(String email);
 }
 
