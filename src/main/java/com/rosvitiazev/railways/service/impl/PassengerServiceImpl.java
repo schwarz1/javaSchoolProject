@@ -17,33 +17,9 @@ import java.util.stream.Collectors;
 public class PassengerServiceImpl implements PassengerService {
     private final PassengerRepository passengerRepository;
 
-
     @Override
     public void createPassenger(Passenger passenger) {
         passengerRepository.save(passenger);
-
     }
-
-    @Override
-    public void updatePassenger(Passenger passenger) {
-        passengerRepository.save(passenger);
-    }
-
-    @Override
-    public Passenger getPassengerById(Long passengerId) {
-        return passengerRepository.findById(passengerId).orElseThrow(()
-                -> new ResourceNotFoundException("Passenger", "id", passengerId));
-    }
-
-    @Override
-    public void deletePassenger(Long id) {
-        passengerRepository.delete(getPassengerById(id));
-    }
-
-    @Override
-    public List<Passenger> getAllPassenger(Long trainId) {
-        return passengerRepository.findAllByTicketTrainId(trainId);
-    }
-
 
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="tikets")
+@Table(name="tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,16 +33,5 @@ public class Ticket {
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
-  /*  @ManyToOne
-    @JoinColumn(name = "schedules_id")
-    private Schedule schedule;*/
-      /*  @ManyToOne
-    @JoinColumn(name = "departure_station_id")
-    private Station departureStation;
-
-    @ManyToOne
-    @JoinColumn(name = "finish_station_id")
-    private Station arrivalStation;
-*/
 }
 

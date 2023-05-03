@@ -12,10 +12,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     Page<Ticket> findAllByTrainIdAndFreeSeats(Long trainId, boolean freeSeats, Pageable pageable);
 
-    boolean existsByPassengerFirstNameAndPassengerLastNameAndTrainId(String firstName,
-                                                                     String lastName,
-                                                                     Long trainId);
-
     boolean existsByPassengerPassportNumberAndTrainId(String passportNumber,
                                                       Long trainId);
 

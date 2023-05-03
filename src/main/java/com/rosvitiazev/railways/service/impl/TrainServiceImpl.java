@@ -1,5 +1,6 @@
 package com.rosvitiazev.railways.service.impl;
 
+import com.rosvitiazev.railways.entity.Schedule;
 import com.rosvitiazev.railways.entity.Train;
 import com.rosvitiazev.railways.exception.ResourceNotFoundException;
 import com.rosvitiazev.railways.repository.TrainRepository;
@@ -12,12 +13,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class TrainServiceImpl implements TrainService {
     private final TrainRepository trainRepository;
-
 
     @Override
     public void create(Train train) {
@@ -51,11 +52,20 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public Train getTrainByNumber(String number) {
-        try {
-            return trainRepository.getTrainByNumber(number);
-        } catch (Exception e) {
-            throw new ResourceNotFoundException("Train", "number", Long.valueOf(number));
+    public List<Train> getTrainsWithoutSchedule(List<Train> allTrains, List<Schedule> schedules) {
+        if (existList(schedules)) {
+            return allTrains;
+        } else {
+            List<Long> scheduledTrainIds = schedules.stream()
+                    .map(schedule -> schedule.getTrain().getId())
+                    .toList();
+            return allTrains.stream()
+                    .filter(train -> !scheduledTrainIds.contains(train.getId()))
+                    .toList();
         }
+    }
+
+    private boolean existList(List<Schedule> schedules) {
+        return Objects.isNull(schedules);
     }
 }

@@ -53,8 +53,9 @@
   <title>Create Station</title>
 </head>
 <body>
+
 <h1>Create Station</h1>
-<form action="#" th:action="@{/create-station}" th:object="${station}" method="post">
+<form action="#" th:action="@{/admin/create-station}" th:object="${station}" method="post">
   <label for="name">Name:</label>
   <input type="text" id="name" th:field="*{name}" required>
   <br>

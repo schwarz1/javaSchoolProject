@@ -62,6 +62,9 @@
   </style>
 </head>
 <body>
+<div th:if="${!#strings.isEmpty(errorMessage)}" style="color: red; margin-bottom: 10px;">
+  <p th:text="${errorMessage}"></p>
+</div>
 <h1>All Trains</h1>
 <table>
   <thead>
@@ -69,9 +72,6 @@
     <th>Train ID</th>
     <th>Train Number</th>
     <th>Number of Seat</th>
-    <!-- <th>Stations DepartureStation</th>
-     <th>Stations ArrivalStation</th>-->
-    <!--  <th>Schedule Id</th>-->
     <th>Number Of Tickets</th>
     <th>Create Ticket</th>
     <th>Edit</th>
@@ -83,16 +83,14 @@
     <td th:text="${train.id}"></td>
     <td th:text="${train.number}"></td>
     <td th:text="${train.seatsNumber}"></td>
-    <!--    <td th:text="${train.schedule.departureStation.name}"></td>
-        <td th:text="${train.schedule.arrivalStation.name}"></td>
-        <td th:text="${train.schedule.id}"></td>-->
     <td th:text="${train.tickets?.size()}"></td>
-    <td><a class="button" th:href="@{/ticket-create/{id}(id=${train.id})}">Create Ticket</a></td>
-    <td><a class="button" th:href="@{/train-update/{id}(id=${train.id})}">Edit</a></td>
-    <td><a class="button" th:href="@{/{id}/delete(id=${train.id})}">Delete</a></td>
+    <td><a class="button" th:href="@{/admin/ticket-create/{id}(id=${train.id})}">Create Ticket</a></td>
+    <td><a class="button" th:href="@{/admin/train-update/{id}(id=${train.id})}">Edit</a></td>
+    <td><a class="button" th:href="@{/admin/{id}/delete(id=${train.id})}">Delete</a></td>
   </tr>
   </tbody>
 </table>
-<td><a class="button" href="/trains-list/new">Add New Train</a></td>
+<td><a class="button" href="/admin/trains-list/new">Add New Train</a></td>
+<td><a class="button" href="/schedules">Back to All Schedules</a></td>
 </body>
 </html>

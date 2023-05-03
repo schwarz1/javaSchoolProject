@@ -10,13 +10,5 @@ import java.util.List;
 @Repository
 public interface PassengerService {
 
-    void updatePassenger(Passenger passenger);
-
-    Passenger getPassengerById(Long passengerId);
-
-    void deletePassenger(Long id);
-
-    List<Passenger> getAllPassenger(Long trainId);
-
     void createPassenger(Passenger passenger);
 }

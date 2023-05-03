@@ -61,8 +61,14 @@
   </style>
 </head>
 <body>
+<div th:if="${errorMessage}" style="color: red; margin-bottom: 10px;">
+  <p th:text="${errorMessage}"></p>
+</div>
 <h1>Create Schedule</h1>
-<form th:action="@{/create-schedule}" th:object="${schedule}" method="post">
+<form th:action="@{/admin/create-schedule}" th:object="${schedule}" method="post" novalidate>
+  <div class="error-message" style="color: red; display: none; margin-bottom: 10px;">
+    <p>Please fill in all required fields.</p>
+  </div>
   <table>
     <tr>
       <td>
@@ -70,7 +76,7 @@
       </td>
       <td>
         <select id="departureStationSelect" name="departureStation"
-                th:field="${schedule.departureStation}">
+                th:field="${schedule.departureStation}" required>
           <option value="">Choose a station</option>
           <th:block th:each="station : ${allStations}">
             <option th:value="${station.id}" th:text="${station.name}"
@@ -86,7 +92,7 @@
       </td>
       <td>
         <select id="stationArrival" name="stationArrival"
-                th:field="${schedule.arrivalStation}">
+                th:field="${schedule.arrivalStation}" required>
           <option value="">Choose a station</option>
           <th:block th:each="station : ${allStations}">
             <option th:value="${station.id}" th:text="${station.name}"
@@ -103,21 +109,23 @@
       </td>
       <td>
         <input type="datetime-local" id="departureTime" name="departureTime"
-               th:field="${schedule.departureTime}"/>
+               th:field="${schedule.departureTime}" required/>
       </td>
     </tr>
     <tr>
       <td>
         <label for="arrivalTime">Arrival Time:</label>
       </td>
-      <td><input type="datetime-local" id="arrivalTime" name="arrivalTime" th:field="${schedule.arrivalTime}"/></td>
+      <td>
+        <input type="datetime-local" id="arrivalTime" name="arrivalTime" th:field="${schedule.arrivalTime}" required/>
+      </td>
     </tr>
     <tr>
       <td>
         <label for="trainSelect">Train:</label>
       </td>
       <td>
-        <select id="trainSelect" name="train" th:field="${schedule.train}">
+        <select id="trainSelect" name="train" th:field="${schedule.train}" required>
           <option value="">Choose a train</option>
           <th:block th:each="train : ${allTrains}">
             <option th:value="${train.id}" th:text="${train.number}"
@@ -128,11 +136,29 @@
     </tr>
     <tr>
       <td colspan="2">
-
         <button class="button" type="submit">Create Schedule</button>
       </td>
     </tr>
+    <a class="button" href="/schedules">Back to All Schedules</a>
   </table>
 </form>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    var isValid = true;
+    var formElements = event.target.elements;
+    for (var i = 0; i < formElements.length; i++) {
+      if (formElements[i].required && !formElements[i].value) {
+        isValid = false;
+        break;
+      }
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+      document.querySelector('.error-message').style.display = 'block';
+    }
+  });
+</script>
+
 </body>
 </html>

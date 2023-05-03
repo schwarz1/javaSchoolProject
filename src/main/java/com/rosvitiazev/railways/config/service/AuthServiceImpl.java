@@ -26,34 +26,21 @@ public class AuthServiceImpl implements AuthService
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return "User logged-in successfully";
     }
-    @Override
-    public String registrationAdmin(User user) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        User registrUser = new User();
-        registrUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        registrUser.setLogin(user.getLogin());
-        registrUser.setEmail(user.getEmail());
-        registrUser.setBalance(user.getBalance());
-        registrUser.setRole(user.getRole());
-        registrUser.setRole("ROLE_ADMIN");
-        userRepository.save(registrUser);
-        LoginDto loginDto = new LoginDto(user.getEmail(),user.getPassword());
-        return login(loginDto);
-    }
 
 
     @Override
-    public String registration(User user) {
+    public String registration(User registry) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User registrUser = new User();
-        registrUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        registrUser.setLogin(user.getLogin());
-        registrUser.setEmail(user.getEmail());
-        registrUser.setBalance(user.getBalance());
-        registrUser.setRole(user.getRole());
+        registrUser.setPassword(passwordEncoder.encode(registry.getPassword()));
+        registrUser.setLogin(registry.getLogin());
+        registrUser.setEmail(registry.getEmail());
+        registrUser.setBalance(registry.getBalance());
+        registrUser.setRole(registry.getRole());
         registrUser.setRole("ROLE_USER");
         userRepository.save(registrUser);
-        LoginDto loginDto = new LoginDto(user.getEmail(),user.getPassword());
+        LoginDto loginDto = new LoginDto(registry.getEmail(), registry.getPassword());
         return login(loginDto);
     }
 }
+

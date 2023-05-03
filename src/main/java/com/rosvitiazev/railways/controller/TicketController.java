@@ -27,7 +27,7 @@ public class TicketController {
         return "ticket/train-free-seats";
     }
 
-    @GetMapping("/ticket-create/{TrainId}")
+    @GetMapping("admin/ticket-create/{TrainId}")
     public String createTicketForm(@PathVariable("TrainId") Long trainId, Model model) {
         Train train = trainService.getTrainId(trainId);
         Ticket ticket = new Ticket();
@@ -40,14 +40,7 @@ public class TicketController {
     @PostMapping("/create-ticket")
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticketService.createTicket(ticket);
-        return "redirect:/trains-list";
-    }
-
-    @GetMapping("/tickets/{id}/edit")
-    public String showUpdateTicketForm(@PathVariable Long id, Model model) {
-        Ticket ticket = ticketService.getTicketById(id);
-        model.addAttribute("ticket", ticket);
-        return "ticket/update-ticket";
+        return "redirect:admin/trains-list";
     }
 
     @PostMapping("/update-ticket")
@@ -62,5 +55,3 @@ public class TicketController {
         return "redirect:/tickets";
     }
 }
-
-

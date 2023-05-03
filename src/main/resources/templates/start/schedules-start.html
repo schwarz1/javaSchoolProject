@@ -53,20 +53,18 @@
   <title>All Schedules</title>
 </head>
 <body>
-<a class="button login-button" th:href="@{/logout}">logout</a>
-<a class="button" th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}" href="/admin/stations">All stations</a>
-<a class="button" th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}" href="admin/trains-list">All Trains</a>
-</body>
+<a class="button login-button" th:href="@{/login}">Login</a>
+<a class="button login-button" th:href="@{/registration}">Registration</a>
 
 <h1>All Schedules</h1>
-<form action="#" th:action="@{/schedules/departureStation/arrivalStation}" method="get" class="search-form">
+<form action="#" th:action="@{/start/schedules/departureStation/arrivalStation}" method="get" class="search-form">
   <label for="departureStation">Departure Station:</label>
   <input type="text" id="departureStation" name="departureStation" required>
   <label for="arrivalStation">Arrival Station:</label>
   <input type="text" id="arrivalStation" name="arrivalStation" >
   <input type="submit" value="Search" class="btn btn-success">
 </form>
-<form action="#" th:action="@{/schedules/date}" method="get" class="search-form">
+<form action="#" th:action="@{/start/schedules/date}" method="get" class="search-form">
   <label for="departureTime">Departure Date:</label>
   <input type="date" id="departureTime" name="departureTime" required>
   <input type="submit" value="Search" class="btn btn-success">
@@ -80,11 +78,6 @@
     <th>Departure Time</th>
     <th>Arrival Time</th>
     <th>Train Number</th>
-    <th>Ticket Buy</th>
-    <th:block th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}">
-      <th>Edit</th>
-      <th>Delete</th>
-    </th:block>
   </tr>
   </thead>
   <tbody>
@@ -94,20 +87,9 @@
     <td th:if="${schedule.departureTime != null}" th:text="${#temporals.format(schedule.departureTime, 'dd-MM-yyyy, HH:mm')}"></td>
     <td th:if="${schedule.arrivalTime != null}"
         th:text="${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}">
-
     </td><td th:text="${schedule.train != null ? schedule.train.number : ''}"></td>
-
-
-    <td><a class="button" th:if="${schedule.train != null}" th:href="@{/trains/{trainId}/free-seats(trainId=${schedule.train.id})}">Buy</a></td>
-
-    <td th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}"><a class="button"  th:href="@{/admin/schedules-update/{id}(id=${schedule.id})}">Edit</a></td>
-    <td th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}"><a class="button"  th:href="@{/admin/schedules-delete/{id}(id=${schedule.id})}">Delete</a></td>
   </tr>
   </tbody>
 </table>
-
-<td><a class="button" th:if="${user.role != null and user.role.equals('ROLE_ADMIN')}" href="admin/create-schedule">Create</a></td>
-
-
 </body>
 </html>

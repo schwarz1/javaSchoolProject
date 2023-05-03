@@ -26,7 +26,8 @@ public class Train {
     private Integer seatsNumber;
     @OneToOne(mappedBy = "train")
     private Schedule schedules;
-    @OneToMany(mappedBy = "train",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     private Set<Ticket> tickets = new HashSet<>();
 
 }
+

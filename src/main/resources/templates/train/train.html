@@ -8,7 +8,7 @@
 <p>Train ID: <span th:text="${train.id}"></span></p>
 <p>Name: <span th:text="${train.name}"></span></p>
 <p>Departure Time: <span th:text="${train.departureTime}"></span></p>
-<!-- Add more train details as needed -->
+
 <a href="/trains-list">Back to Trains</a>
 <a href="/trains-list/{id}/edit" th:href="@{/trains/{id}/edit(id=${train.id})}">Edit</a>
 <a href="/trains-list/{id}/delete" th:href="@{/trains/{id}/delete(id=${train.id})}">Delete</a>

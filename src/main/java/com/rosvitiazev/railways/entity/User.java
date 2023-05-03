@@ -26,18 +26,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "login",unique = true)
-    @NotBlank(message = "Login cannot be empty")
+    @Column(name = "login", unique = true)
     private String login;
     @Column(name = "password")
-    @NotBlank(message = "Password cannot be empty")
     private String password;
-    @Column(name = "email",unique = true)
-    @NotBlank(message = "Email cannot be empty")
-    @Email(message = "Email is not correct")
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "balance")
-    @DecimalMin(value = "0.0", message = "Balance must be non-negative")
     private Double balance;
     @Column(name = "role")
     private String role;

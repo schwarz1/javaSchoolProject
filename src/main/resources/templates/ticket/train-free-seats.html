@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head><style>
@@ -72,9 +71,9 @@
     <td th:text="${seat.seatNumber}"></td>
     <td th:text="${seat.price}"></td>
     <td><a class="button" th:href="@{/create/{ticketId}(ticketId=${seat.id})}">Buy</a></td>
-
   </tr>
   </tbody>
+  <a class="button" href="/schedules">Back to All Schedules</a>
 </table>
 </body>
 </html>

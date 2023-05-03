@@ -69,8 +69,12 @@
   </style>
 </head>
 <body>
+<div th:if="${errorMessage != null}" style="color: red; margin-bottom: 10px;">
+  <p th:text="${errorMessage}"></p>
+</div>
 <h1>Update Schedule</h1>
-<form th:action="@{/update-schedules}" th:object="${schedule}" method="post">
+<form th:action="@{/admin/update-schedules}" th:object="${schedule}" method="post">
+
   <input type="hidden" th:field="*{id}"/>
   <table>
     <tr>
@@ -122,29 +126,47 @@
                th:field="${schedule.arrivalTime}"/>
       </td>
     </tr>
-    -   <tr>
-    <td>
-      <label for="trainSelect">Train:</label>
-    </td>
-    <td>
-
-      <select id="trainSelect" name="train" th:field="${schedule.train}">
-        <option value="">Choose a train</option>
-        <th:block th:each="train : ${allTrains}">
-          <option th:value="${train.id}" th:text="${train.number}"
-                  th:selected="${(schedule.train != null and train.id == schedule.train.id) or
-                                (schedule.train == null and train.id == previousTrain)}"></option>
-
-        </th:block>
-      </select>
-    </td>
-  </tr>
+    <tr>
+      <td>
+        <label for="trainSelect">Train:</label>
+      </td>
+      <td>
+        <select id="trainSelect" name="train" th:field="${schedule.train}">
+          <option value="">Choose a train</option>
+          <th:block th:each="train : ${allTrains}">
+            <option th:value="${train.id}" th:text="${train.number}"
+                    th:selected="${(schedule.train != null && train.id == schedule.train.id) or
+                    (schedule.train == null && train.id == previousTrain)}">
+            </option>
+          </th:block>
+        </select>
+      </td>
+    </tr>
     <tr>
       <td colspan="2">
         <button class="button" type="submit">Update Schedule</button>
       </td>
+
     </tr>
+    <a class="button" href="/schedules">Back to All Schedules</a>
   </table>
 </form>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    var isValid = true;
+    var formElements = event.target.elements;
+    for (var i = 0; i < formElements.length; i++) {
+      if (formElements[i].required && !formElements[i].value) {
+        isValid = false;
+        break;
+      }
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+      document.querySelector('.error-message').style.display = 'block';
+    }
+  });
+</script>
 </body>
 </html>

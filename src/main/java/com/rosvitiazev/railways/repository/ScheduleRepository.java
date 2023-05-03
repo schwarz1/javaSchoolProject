@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-    default boolean existsAnyRecord() {
-        return count() > 0;
-    }
+
+    Schedule findByTrainId(Long trainId);
 
     Page<Schedule> findByDepartureStationAndArrivalStation(Station departureStation,
                                                            Station arrivalStation,
@@ -24,6 +23,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     Page<Schedule> findAllByDepartureTimeBetween(LocalDateTime localDateTimeMin,
                                                  LocalDateTime localDateTimeMax,
                                                  Pageable pageable);
+
 
 }
 

@@ -26,8 +26,7 @@ public class AuthController {
     @PostMapping("/login-user")
     public String login(@ModelAttribute("loginDto") LoginDto loginDto, Model model) {
         try {
-            String response = authService.login(loginDto);
-            model.addAttribute("successMessage", response);
+            authService.login(loginDto);
             return "redirect:/schedules";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Invalid email or password");
@@ -47,6 +46,7 @@ public class AuthController {
             String response = authService.registration(user);
             model.addAttribute("successMessage", response);
             userService.createUser(user);
+            authService.login(new LoginDto(user.getEmail(), user.getPassword()));
             return "redirect:/schedules";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error occurred while registering user");

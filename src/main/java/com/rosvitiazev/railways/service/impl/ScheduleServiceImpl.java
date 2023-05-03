@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,23 +27,21 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final StationRepository stationRepository;
 
+
+
     @Override
     public List<Schedule> getAllSchedule() {
-        if (isExistSchedule()) {
+        if(isExistSchedule()){
             return null;
-        } else {
+        }else {
             Sort sort = Sort.by("departureTime").ascending();
             Pageable pageable = PageRequest.of(0, 1000, sort);
             Page<Schedule> schedulePage = scheduleRepository.findAll(pageable);
             return actualSchedule(schedulePage.getContent());
-        }
-    }
-
-    private boolean isExistSchedule() {
+        }}
+    private boolean isExistSchedule(){
         List<Schedule> scheduleList = scheduleRepository.findAll();
-        return scheduleList.size() == 0;
-    }
-
+        return scheduleList.size()==0;}
     @Override
     public List<Schedule> getAllScheduleByStationDepartureStationAndArrival(String stationDeparture,
                                                                             String stationArrival
@@ -111,13 +110,28 @@ public class ScheduleServiceImpl implements ScheduleService {
                 new ResourceNotFoundException("Schedule", "id", id)));
     }
 
+    @Override
+    public Schedule getScheduleByTrainId(Long trainId) {
+        try {
+            return scheduleRepository.findByTrainId(trainId);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Schedule", "trainId", trainId);
+        }
+    }
+
+    @Override
+    public List<Schedule> getAllScheduleNotSort() {
+        return scheduleRepository.findAll();
+    }
+
     private List<Schedule> actualSchedule(List<Schedule> list) {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        return Optional.ofNullable(list)
+        LocalDateTime currentDateTime = LocalDateTime.now().plus(Duration.ofMinutes(10));
+        if(list.size()==0){
+            return null;}
+        return Optional.of(list)
                 .orElse(Collections.emptyList())
                 .stream()
                 .filter(ss -> currentDateTime.isBefore(ss.getDepartureTime()))
                 .toList();
-
     }
 }

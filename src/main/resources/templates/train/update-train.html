@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
   <title>Edit Train</title>
   <style>
@@ -63,7 +63,7 @@
 </head>
 <body>
 <h1>Update Train</h1>
-<form th:action="@{/update-train}" th:object="${train}" method="post">
+<form th:action="@{/admin/update-train}" th:object="${train}" method="post">
   <input type="hidden" th:field="*{id}"/>
   <table>
     <tr>
@@ -73,23 +73,10 @@
     <tr>
       <td><label for="seatsNumber">Number of Seats:</label></td>
       <td><input type="number" id="seatsNumber" name="seatsNumber" th:field="${train.seatsNumber}"/></td>
-      <!--  </tr>
-        <td><label>Choose a schedule:</label></td>
-        <td>
-          <th:block th:each="schedule : ${allSchedules}">
-            <input type="radio" name="schedule.id" th:value="${schedule.id}"
-                   th:id="'schedule-' + ${schedule.id}"
-                   th:checked="${train.schedule?.id == schedule.id}"/>
-            <label th:for="'schedule-' + ${schedule.id}">
-              <span th:text="${schedule.departureStation.name} + ' - ' + ${schedule.arrivalStation.name} + ' / '"></span>
-              <span th:text="${#temporals.format(schedule.departureTime,'dd-MM-yyyy, HH:mm')} + ' - ' + ${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}"></span>
-            </label>
-          </th:block>
-        </td>
-        <tr>-->
-      <td colspan="2"><button type="submit">Update Train</button></td>
     </tr>
   </table>
+  <button class="button" type="submit">Update Train</button>
+
 </form>
 </body>
 </html>

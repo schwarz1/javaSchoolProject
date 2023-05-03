@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,16 +13,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="schedules")
+@Table(name = "schedules")
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name="departure_time")
+    @Column(name = "departure_time")
     private LocalDateTime departureTime;
-    @Column(name="arrival_time")
+    @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
     @ManyToOne
     @JoinColumn(name = "departure_station_id")

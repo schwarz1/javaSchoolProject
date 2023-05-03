@@ -55,7 +55,7 @@
 <body>
 <h1>Update Station</h1>
 
-<form action="#" th:action="@{'/' + ${station.id}}" th:object="${station}" method="post">
+<form action="#" th:action="@{'/admin/' + ${station.id}}" th:object="${station}" method="post">
   <input type="hidden" th:field="*{id}">
   <label for="name">Name:</label>
   <input type="text" id="name" th:field="*{name}" required>

@@ -18,9 +18,9 @@ public interface TicketService {
 
     void sellTicket(Ticket ticket, Passenger passenger);
 
-    boolean existsByPassengerTrainId(String firstName,
-                                     String lastName, Long trainId);
 
     boolean existsByPassengerPassportAndTrainId(String passportNumber,
                                                 Long trainId);
+
+    boolean validTicket(Ticket ticket);
 }

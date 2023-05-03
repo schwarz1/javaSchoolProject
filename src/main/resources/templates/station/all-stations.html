@@ -53,6 +53,9 @@
   <title>All Stations</title>
 </head>
 <body>
+<div th:if="${!#strings.isEmpty(errorMessage)}" style="color: red; margin-bottom: 10px;">
+  <p th:text="${errorMessage}"></p>
+</div>
 <h1>All Stations</h1>
 <table>
   <thead>
@@ -67,11 +70,12 @@
   <tr th:each="station : ${stations}">
     <td th:text="${station.id}">ID</td>
     <td th:text="${station.name}">Name</td>
-    <td><a class="button" th:href="@{'/update/' + ${station.id}}">Edit</a> </td>
-    <td><a class="button" th:href="@{'/stations-delete/' + ${station.id}}">Delete</a></td>
+    <td><a class="button" th:href="@{'/admin/update/' + ${station.id}}">Edit</a> </td>
+    <td><a class="button" th:href="@{'/admin/stations-delete/' + ${station.id}}">Delete</a></td>
   </tr>
   </tbody>
 </table>
-<td><a class="button" href="/create">Create New Station</a></td>
+<td><a class="button" href="/admin/create/station">Create New Station</a></td>
+<a class="button" href="/schedules">Back to All Schedules</a>
 </body>
 </html>

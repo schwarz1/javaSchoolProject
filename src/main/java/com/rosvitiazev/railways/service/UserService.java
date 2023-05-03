@@ -1,9 +1,17 @@
 package com.rosvitiazev.railways.service;
 
+import com.rosvitiazev.railways.entity.Ticket;
 import com.rosvitiazev.railways.entity.User;
 
-public interface UserService {
-    public void createUser(User user);
+import java.security.Principal;
 
-    public Boolean payTicket(Double price, Long userId);
+public interface UserService {
+    void createUser(User user);
+
+    Boolean payTicket(Ticket ticket, Long userId);
+
+    User getAauthenticationUser();
+
+
+    User getUserByPrincipal(Principal principal);
 }

@@ -6,7 +6,5 @@ import com.rosvitiazev.railways.payload.dto.LoginDto;
 public interface AuthService {
     String login(LoginDto loginDto);
 
-    String registrationAdmin(User user);
-
     String registration(User registr);
 }
