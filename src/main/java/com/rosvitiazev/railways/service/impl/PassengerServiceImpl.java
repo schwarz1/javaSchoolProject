@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Log4j
 public class PassengerServiceImpl implements PassengerService {
     private final PassengerRepository passengerRepository;
 
