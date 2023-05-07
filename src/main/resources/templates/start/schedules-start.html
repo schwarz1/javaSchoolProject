@@ -1,95 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      color: blue;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .button {
-      display: inline-block;
-      padding: 8px 16px;
-      margin-top: 10px;
-      background-color: blue;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
-    .search-form {
-      margin-top: 20px;
-    }
-
-    .search-form label {
-      margin-right: 5px;
-    }
-    .search-form input[type="text"] {
-      margin-right: 5px;
-    }
-    .search-form .btn {
-      margin-top: 10px;
-    }
-    .button:hover {
-      background-color: darkblue;
-    }
-  </style>
-  <title>All Schedules</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <title>All Schedules</title>
 </head>
 <body>
-<a class="button login-button" th:href="@{/login}">Login</a>
-<a class="button login-button" th:href="@{/registration}">Registration</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="navbar-brand">España Express</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/registration}">Registration</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <h1>All Schedules</h1>
-<form action="#" th:action="@{/start/schedules/departureStation/arrivalStation}" method="get" class="search-form">
-  <label for="departureStation">Departure Station:</label>
-  <input type="text" id="departureStation" name="departureStation" required>
-  <label for="arrivalStation">Arrival Station:</label>
-  <input type="text" id="arrivalStation" name="arrivalStation" >
-  <input type="submit" value="Search" class="btn btn-success">
-</form>
-<form action="#" th:action="@{/start/schedules/date}" method="get" class="search-form">
-  <label for="departureTime">Departure Date:</label>
-  <input type="date" id="departureTime" name="departureTime" required>
-  <input type="submit" value="Search" class="btn btn-success">
+
+<form action="#" th:action="@{/start/schedules/departureStation/arrivalStation}" method="get" class="form-inline mt-3">
+    <div class="form-group">
+        <label for="departureStation">Departure Station:</label>
+        <input type="text" id="departureStation" name="departureStation" class="form-control" required>
+    </div>
+    <div class="form-group ml-3">
+        <label for="arrivalStation">Arrival Station:</label>
+        <input type="text" id="arrivalStation" name="arrivalStation" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success ml-3">Search</button>
 </form>
 
-<table>
-  <thead>
-  <tr>
-    <th>Departure Station</th>
-    <th>Station Arrival</th>
-    <th>Departure Time</th>
-    <th>Arrival Time</th>
-    <th>Train Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="schedule : ${schedules}">
-    <td th:if="${schedule.departureStation != null}" th:text="${schedule.departureStation.name}"></td>
-    <td th:if="${schedule.arrivalStation != null}" th:text="${schedule.arrivalStation.name}"></td>
-    <td th:if="${schedule.departureTime != null}" th:text="${#temporals.format(schedule.departureTime, 'dd-MM-yyyy, HH:mm')}"></td>
-    <td th:if="${schedule.arrivalTime != null}"
-        th:text="${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}">
-    </td><td th:text="${schedule.train != null ? schedule.train.number : ''}"></td>
-  </tr>
-  </tbody>
+<br>
+
+<form action="#" th:action="@{/start/schedules/date}" method="get" class="form-inline">
+    <div class="form-group">
+        <label for="departureTime">Departure Date:</label>
+        <input type="date" id="departureTime" name="departureTime" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success ml-3">Search</button>
+</form>
+
+<br>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Departure Station</th>
+        <th>Station Arrival</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Train Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="schedule : ${schedules}">
+        <td th:if="${schedule.departureStation != null}" th:text="${schedule.departureStation.name}"></td>
+        <td th:if="${schedule.arrivalStation != null}" th:text="${schedule.arrivalStation.name}"></td>
+        <td th:if="${schedule.departureTime != null}"
+            th:text="${#temporals.format(schedule.departureTime, 'dd-MM-yyyy, HH:mm')}"></td>
+        <td th:if="${schedule.arrivalTime != null}"
+            th:text="${#temporals.format(schedule.arrivalTime, 'dd-MM-yyyy, HH:mm')}"></td>
+        <td th:text="${schedule.train != null ? schedule.train.number : ''}"></td>
+    </tr>
+    </tbody>
 </table>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
