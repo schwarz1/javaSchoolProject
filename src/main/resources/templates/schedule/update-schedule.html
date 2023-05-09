@@ -1,172 +1,133 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-  <meta charset="UTF-8">
-  <title>Update Schedule</title>
-  <style>
-    input[type="datetime-local"] {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 16px;
-    }
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    h1 {
-      color: blue;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 8px 16px;
-      margin-top: 10px;
-      background-color: blue;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
-
-    .search-form {
-      margin-top: 20px;
-    }
-
-    .search-form label {
-      margin-right: 5px;
-    }
-
-    .search-form input[type="text"] {
-      margin-right: 5px;
-    }
-
-    .search-form .btn {
-      margin-top: 10px;
-    }
-
-    .button:hover {
-      background-color: darkblue;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Update Schedule</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 </head>
 <body>
 <div th:if="${errorMessage != null}" style="color: red; margin-bottom: 10px;">
-  <p th:text="${errorMessage}"></p>
+    <p th:text="${errorMessage}"></p>
 </div>
-<h1>Update Schedule</h1>
+<div class="text-center" style="margin-top: 20px; margin-bottom: 20px;">
+    <h1 style="font-family: Arial, sans-serif; font-size: 36px;">Update Schedule</h1>
+</div>
 <form th:action="@{/admin/update-schedules}" th:object="${schedule}" method="post">
 
-  <input type="hidden" th:field="*{id}"/>
-  <table>
-    <tr>
-      <td>
-        <label for="departureStationSelect">Departure Station:</label>
-      </td>
-      <td>
-        <select id="departureStationSelect" name="departureStation" th:field="${schedule.departureStation}">
-          <option value="">Choose a station</option>
-          <th:block th:each="station : ${allStations}">
-            <option th:value="${station.id}" th:text="${station.name}"
-                    th:selected="${(schedule.departureStation != null and station.id == schedule.departureStation.id)
-                                or (schedule.departureStation == null and station.id == previousDepartureStation)}"></option>
+    <input type="hidden" th:field="*{id}"/>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label for="departureStationSelect">Departure Station:</label>
+                        </td>
+                        <td>
+                            <select id="departureStationSelect" name="departureStation"
+                                    th:field="${schedule.departureStation}"
+                                    class="form-control">
+                                <option value="">Choose a station</option>
+                                <th:block th:each="station : ${allStations}">
+                                    <option th:value="${station.id}" th:text="${station.name}"
+                                            th:selected="${(schedule.departureStation != null and station.id == schedule.departureStation.id)
+                                        or (schedule.departureStation == null and station.id == previousDepartureStation)}"></option>
 
-          </th:block>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="stationArrival">Arrival Station:</label>
-      </td>
-      <td>
-        <select id="stationArrival" name="stationArrival" th:field="${schedule.arrivalStation}">
-          <option value="">Choose a station</option>
-          <th:block th:each="station : ${allStations}">
-            <option th:value="${station.id}" th:text="${station.name}"
-                    th:selected="${(schedule.arrivalStation != null and station.id == schedule.arrivalStation.id) or
-                                (schedule.arrivalStation == null and station.id == previousArrivalStation)}"></option>
-          </th:block>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="departureTime">Departure Time:</label>
-      </td>
-      <td>
-        <input type="datetime-local" id="departureTime" name="departureTime"
-               th:field="${schedule.departureTime}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="arrivalTime">Arrival Time:</label>
-      </td>
-      <td>
-        <input type="datetime-local" id="arrivalTime" name="arrivalTime"
-               th:field="${schedule.arrivalTime}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="trainSelect">Train:</label>
-      </td>
-      <td>
-        <select id="trainSelect" name="train" th:field="${schedule.train}">
-          <option value="">Choose a train</option>
-          <th:block th:each="train : ${allTrains}">
-            <option th:value="${train.id}" th:text="${train.number}"
-                    th:selected="${(schedule.train != null && train.id == schedule.train.id) or
-                    (schedule.train == null && train.id == previousTrain)}">
-            </option>
-          </th:block>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <button class="button" type="submit">Update Schedule</button>
-      </td>
-
-    </tr>
-    <a class="button" href="/schedules">Back to All Schedules</a>
-  </table>
+                                </th:block>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="stationArrival">Arrival Station:</label>
+                        </td>
+                        <td>
+                            <select id="stationArrival" name="stationArrival" th:field="${schedule.arrivalStation}"
+                                    class="form-control">
+                                <option value="">Choose a station</option>
+                                <th:block th:each="station : ${allStations}">
+                                    <option th:value="${station.id}" th:text="${station.name}"
+                                            th:selected="${(schedule.arrivalStation != null and station.id == schedule.arrivalStation.id) or
+                                        (schedule.arrivalStation == null and station.id == previousArrivalStation)}"></option>
+                                </th:block>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="departureTime">Departure Time:</label>
+                        </td>
+                        <td>
+                            <input type="datetime-local" id="departureTime" name="departureTime"
+                                   th:field="${schedule.departureTime}" class="form-control"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="arrivalTime">Arrival Time:</label>
+                        </td>
+                        <td>
+                            <input type="datetime-local" id="arrivalTime" name="arrivalTime"
+                                   th:field="${schedule.arrivalTime}" class="form-control"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="trainSelect">Train:</label>
+                        </td>
+                        <td>
+                            <select id="trainSelect" name="train" th:field="${schedule.train}" class="form-control">
+                                <option value="">Choose a train</option>
+                                <th:block th:each="train : ${allTrains}">
+                                    <option th:value="${train.id}" th:text="${train.number}"
+                                            th:selected="${(schedule.train != null && train.id == schedule.train.id) or
+                                        (schedule.train == null && train.id == previousTrain)}">
+                                    </option>
+                                </th:block>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="btn btn-primary btn-block" type="submit">Update Schedule</button>
+                            <a class="btn btn-secondary btn-block" href="/schedules">Back to All Schedules</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script>
-  document.querySelector('form').addEventListener('submit', function(event) {
-    var isValid = true;
-    var formElements = event.target.elements;
-    for (var i = 0; i < formElements.length; i++) {
-      if (formElements[i].required && !formElements[i].value) {
-        isValid = false;
-        break;
-      }
-    }
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            var isValid = true;
+            var formElements = event.target.elements;
+            for (var i = 0; i < formElements.length; i++) {
+                if (formElements[i].required && !formElements[i].value) {
+                    isValid = false;
+                    break;
+                }
+            }
 
-    if (!isValid) {
-      event.preventDefault();
-      document.querySelector('.error-message').style.display = 'block';
-    }
-  });
+            if (!isValid) {
+                event.preventDefault();
+                $('.error-message').css('display', 'block');
+            }
+        });
+    });
 </script>
+
 </body>
 </html>

@@ -1,81 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      color: blue;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .button {
-      display: inline-block;
-      padding: 8px 16px;
-      margin-top: 10px;
-      background-color: blue;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
-    .search-form {
-      margin-top: 20px;
-    }
-
-    .search-form label {
-      margin-right: 5px;
-    }
-    .search-form input[type="text"] {
-      margin-right: 5px;
-    }
-    .search-form .btn {
-      margin-top: 10px;
-    }
-    .button:hover {
-      background-color: darkblue;
-    }
-  </style>
-  <title>All Stations</title>
+    <title>All Stations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous">
 </head>
 <body>
-<div th:if="${!#strings.isEmpty(errorMessage)}" style="color: red; margin-bottom: 10px;">
-  <p th:text="${errorMessage}"></p>
+<div th:if="${!#strings.isEmpty(errorMessage)}" class="alert alert-danger" style="margin-bottom: 10px;">
+    <p th:text="${errorMessage}"></p>
 </div>
-<h1>All Stations</h1>
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Edite</th>
-    <th>Delete</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="station : ${stations}">
-    <td th:text="${station.id}">ID</td>
-    <td th:text="${station.name}">Name</td>
-    <td><a class="button" th:href="@{'/admin/update/' + ${station.id}}">Edit</a> </td>
-    <td><a class="button" th:href="@{'/admin/stations-delete/' + ${station.id}}">Delete</a></td>
-  </tr>
-  </tbody>
-</table>
-<td><a class="button" href="/admin/create/station">Create New Station</a></td>
-<a class="button" href="/schedules">Back to All Schedules</a>
+<div class="container">
+    <h1 class="my-4">All Stations</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="station : ${stations}">
+            <td th:text="${station.id}">ID</td>
+            <td th:text="${station.name}">Name</td>
+            <td><a class="btn btn-primary" th:href="@{'/admin/update/' + ${station.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/admin/stations-delete/' + ${station.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mb-4" href="/admin/create/station">Create New Station</a>
+    <a class="btn btn-secondary" href="/schedules">Back to All Schedules</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
